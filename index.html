@@ -8,45 +8,11 @@
     <META NAME="Keywords" CONTENT="">
     <META NAME="Description" CONTENT="">
     <link rel="stylesheet" href="style.css">
-    <style>
-        html,
-        body {
-            height: 100%;
-            padding: 0;
-            margin: 0;
-            background: rgba(0, 0, 0, 0.851);
-        }
-
-        canvas {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        #text {
-            position: relative;
-            top: 0;
-            right:0;
-            width: 100%;
-            height: 100%;
-            justify-content: flex-start;
-            align-items: flex-start;
-            color: #d63031;
-            font-size: 2em;
-            background: rgba(0, 0, 0, 0.851);
-            transition: opacity 1s;
-        }
-        .text {
-            position: relative;
-            opacity: 0;
-            transition: opacity 1s;
-            margin-top: 20px; /* Adjust this value to set the distance between texts */
-        }
-    </style>
 </HEAD>
 
 <BODY>
     <div id="text"></div>
+    <div id="newtext"></div>
     <div class="box">
         <canvas id="pinkboard"></canvas>
         <div id="image-container">
@@ -82,20 +48,22 @@
         }
 
 
-          var texts = 
+        var texts = 
         [
-        "Phụng ơi", 
-        "Chúc mừng sinh nhật Phụng nha",
-        "Khoa chúc Phụng luôn vui vẻ, hạnh phúc",
-        "Khoa chúc Phụng sẽ đạt được những gì mình mong muốn",
-        "Khoa biết Phụng của Khoa rất giỏi giang, mạnh mẽ, xinh đẹp",
-        "Khoa biết Phụng của Khoa rất dễ thương, ấm áp",
-        "Khoa muốn Phụng biết KHoa sẽ luôn bên Phụng",
-        "Và, Khoa muốn nói với Phụng rằng", "Khoa thích Phụng",
-        "Khoa yêu Phụng",
-        "Khoa thương Phụng",
-        "Happy Birthday My girl <3"];
+            "Phụng ơi", 
+            // "Chúc mừng sinh nhật Phụng nha",
+            // "Khoa chúc Phụng luôn vui vẻ, hạnh phúc",
+            // "Khoa chúc Phụng sẽ đạt được những gì mình mong muốn",
+            // "Khoa biết Phụng của Khoa rất giỏi giang, mạnh mẽ, xinh đẹp",
+            // "Khoa biết Phụng của Khoa rất dễ thương, ấm áp",
+            // "Khoa muốn Phụng biết Khoa sẽ luôn bên Phụng",
+            // "Và, Khoa muốn nói với Phụng rằng", "Khoa thích Phụng",
+            // "Khoa yêu Phụng",
+            // "Khoa thương Phụng",
+        ];
 
+        var intervalTime = 1000; // Interval time in milliseconds
+        var totalTextDuration = texts.length * intervalTime;
         var textIndex = 0;
         var initialTop = 0;
         var textContainer = document.getElementById('text');
@@ -114,7 +82,7 @@
 
             textIndex++;
             if (textIndex < texts.length) {
-                setTimeout(showNextText, 5000); // Adjust interval to fit your needs
+                setTimeout(showNextText, intervalTime); // Adjust interval to fit your needs
             }
         }
 
@@ -124,6 +92,21 @@
 
         startTextAnimation();
 
+        function hideAllText() {
+            while (textContainer.firstChild) {
+                textContainer.removeChild(textContainer.firstChild);
+            }
+            // Display "Happy Birthday" after clearing all text
+            var textContainer2 = document.getElementById('newtext');
+            var textElement = document.createElement('div');
+            textElement.className = 'newtext';
+            textElement.innerHTML = "Happy Birthday My Girl";
+            textContainer2.appendChild(textElement);
+            textElement.offsetHeight;
+            textElement.style.opacity = 1;
+            
+        }
+        setTimeout(hideAllText, totalTextDuration);
         /*
          */
         (function () {
